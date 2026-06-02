@@ -1,0 +1,6 @@
+erDiagram
+    Timeline ||--o{ Cut : "ordered list of"
+    Cut ||--o| StartImage : "start_image (-> beat_image)"
+    Cut ||--o| EndImage : "end_image"
+    Timeline ||--o{ Beat : "exports as"
+    Beat ||--|| Cut : "one per"

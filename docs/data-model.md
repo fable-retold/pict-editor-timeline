@@ -137,14 +137,8 @@ let tmpExport2 = tmpView2.getStoryboardJSON();
 
 ## Relationships
 
-```mermaid
-erDiagram
-    Timeline ||--o{ Cut : "ordered list of"
-    Cut ||--o| StartImage : "start_image (-> beat_image)"
-    Cut ||--o| EndImage : "end_image"
-    Timeline ||--o{ Beat : "exports as"
-    Beat ||--|| Cut : "one per"
-```
+<!-- bespoke diagram: edit diagrams/relationships.mmd or .hints.json, then: npx pict-renderer-graph build modules/pict/pict-editor-timeline/docs -->
+![Relationships](diagrams/relationships.svg)
 
 ## See Also
 

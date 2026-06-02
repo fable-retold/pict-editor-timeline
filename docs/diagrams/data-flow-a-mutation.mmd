@@ -1,0 +1,10 @@
+sequenceDiagram
+    participant U as User
+    participant V as PictView-Timeline
+    participant O as TimelineOps
+    U->>V: clicks "+ Add Cut" (inline onclick)
+    V->>O: addCut(-1)
+    O->>O: build cut with defaults + unique id, push to this._Cuts
+    V->>V: render()
+    V->>O: getCuts() / getTotalSeconds()
+    V->>U: repaints editor HTML from the cuts array

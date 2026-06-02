@@ -1,0 +1,11 @@
+graph TB
+    subgraph Editor["PictView-Timeline render output"]
+        TB["Toolbar: Add Cut - cut count + total seconds - Copy JSON"]
+        List["Cuts list: one card per cut"]
+        Strip["Duration strip: proportional color blocks (read-only)"]
+        Input["Hidden file input (per-instance id)"]
+    end
+
+    TB --> List --> Strip --> Input
+
+    style Editor fill:#f5f5f5,stroke:#bdbdbd,color:#333

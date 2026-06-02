@@ -4,19 +4,8 @@
 
 ## Component Overview
 
-```mermaid
-graph TD
-    App[Your Application] --> V[PictView-Timeline]
-    V --> Ops[Pict-Provider-TimelineOps]
-    V --> DD[Pict-Provider-TimelineDragDrop]
-    DD --> Ops
-    Ops --> Cuts[(per-instance Cuts array)]
-
-    style App fill:#e8f5e9,stroke:#42b983,color:#333
-    style V fill:#e3f2fd,stroke:#42a5f5,color:#333
-    style Ops fill:#fff3e0,stroke:#ffa726,color:#333
-    style DD fill:#f3e5f5,stroke:#ab47bc,color:#333
-```
+<!-- bespoke diagram: edit diagrams/component-overview.mmd or .hints.json, then: npx pict-renderer-graph build modules/pict/pict-editor-timeline/docs -->
+![Component Overview](diagrams/component-overview.svg)
 
 | Component | File | Role |
 |-----------|------|------|
@@ -65,19 +54,8 @@ The test suite pins this down: two ops instances do not share cuts, `loadStorybo
 
 The view overrides `render()` directly and builds the editor as an HTML string assigned to the destination element. (It does not use Pict's `Templates`/`Renderables` machinery - the configuration's `DefaultRenderable` field is vestigial.) A single `render()` call emits four regions:
 
-```mermaid
-graph TB
-    subgraph Editor["PictView-Timeline render output"]
-        TB["Toolbar: Add Cut - cut count + total seconds - Copy JSON"]
-        List["Cuts list: one card per cut"]
-        Strip["Duration strip: proportional color blocks (read-only)"]
-        Input["Hidden file input (per-instance id)"]
-    end
-
-    TB --> List --> Strip --> Input
-
-    style Editor fill:#f5f5f5,stroke:#bdbdbd,color:#333
-```
+<!-- bespoke diagram: edit diagrams/rendering.mmd or .hints.json, then: npx pict-renderer-graph build modules/pict/pict-editor-timeline/docs -->
+![Rendering](diagrams/rendering.svg)
 
 Each **cut card** is a draggable row containing, left to right:
 
@@ -93,36 +71,15 @@ The **duration strip** renders only when there is at least one cut and a positiv
 
 ## Data Flow: a Mutation
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant V as PictView-Timeline
-    participant O as TimelineOps
-    U->>V: clicks "+ Add Cut" (inline onclick)
-    V->>O: addCut(-1)
-    O->>O: build cut with defaults + unique id, push to this._Cuts
-    V->>V: render()
-    V->>O: getCuts() / getTotalSeconds()
-    V->>U: repaints editor HTML from the cuts array
-```
+<!-- bespoke diagram: edit diagrams/data-flow-a-mutation.mmd or .hints.json, then: npx pict-renderer-graph build modules/pict/pict-editor-timeline/docs -->
+![Data Flow: a Mutation](diagrams/data-flow-a-mutation.svg)
 
 The convenience methods on the view (`addCut`, `removeCut`, `duplicateCut`, `loadStoryboard`) each delegate to the ops provider and then call `render()`. The one exception is `updateCut()`, which intentionally does not re-render so that typing into the prompt textarea stays smooth; callers decide when to repaint.
 
 ## Data Flow: a Reorder
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant Card as Cut card (DOM)
-    participant DD as TimelineDragDrop
-    participant O as TimelineOps
-    participant V as PictView-Timeline
-    U->>Card: drag a card over another
-    Card->>DD: onDragStart / onDragOver / onDrop (inline handlers)
-    DD->>DD: track source index, detect top/bottom half for insert position
-    DD->>O: moveCut(fromIndex, toIndex)
-    DD->>V: render()
-```
+<!-- bespoke diagram: edit diagrams/data-flow-a-reorder.mmd or .hints.json, then: npx pict-renderer-graph build modules/pict/pict-editor-timeline/docs -->
+![Data Flow: a Reorder](diagrams/data-flow-a-reorder.svg)
 
 The drag-drop provider keeps a `_DragState` with the source index, target index, and whether the cursor is in the top or bottom half of the hovered card (insert-before vs insert-after). On drop it adjusts the target index for the insert position and for the downward-shift that removing the source row causes, then calls `TimelineOps.moveCut()` and re-renders. CSS classes (`pet-dragging`, `pet-drag-insert-before`, `pet-drag-insert-after`) provide the visual feedback and are cleared on drag end.
 

@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant U as User
+    participant Card as Cut card (DOM)
+    participant DD as TimelineDragDrop
+    participant O as TimelineOps
+    participant V as PictView-Timeline
+    U->>Card: drag a card over another
+    Card->>DD: onDragStart / onDragOver / onDrop (inline handlers)
+    DD->>DD: track source index, detect top/bottom half for insert position
+    DD->>O: moveCut(fromIndex, toIndex)
+    DD->>V: render()
