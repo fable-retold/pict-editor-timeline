@@ -83,52 +83,13 @@ export produces identical JSON.
 
 ### File structure
 
-```
-pict-editor-timeline/
-├── package.json
-├── .quackage.json
-├── source/
-│   ├── Pict-Section-Timeline.js           # Main export
-│   ├── views/
-│   │   ├── PictView-Timeline.js           # Container view: renders the full editor
-│   │   ├── PictView-Timeline-Cut.js       # Per-cut row: prompt, duration, image slots
-│   │   └── PictView-Timeline-Toolbar.js   # Top bar: add cut, import/export, total duration
-│   ├── providers/
-│   │   ├── Pict-Provider-TimelineDragDrop.js   # HTML5 drag-and-drop reordering
-│   │   └── Pict-Provider-TimelineOps.js        # Data mutations (add, remove, reorder, update)
-│   └── templates/
-│       ├── timeline-container.html
-│       ├── timeline-cut.html
-│       └── timeline-toolbar.html
-├── test/
-│   └── Pict-Timeline_tests.js
-└── docs/
-    └── README.md
-```
+<!-- bespoke diagram: edit diagrams/file-structure.mmd or .hints.json, then: npx pict-renderer-graph build modules/pict/pict-editor-timeline -->
+![File structure](diagrams/file-structure.svg)
 
 ### View hierarchy
 
-```
-PictView-Timeline (container)
-├── PictView-Timeline-Toolbar
-│   ├── [+ Add Cut] button
-│   ├── [Import JSON] button
-│   ├── [Export JSON] button
-│   └── Total duration display (sum of all cuts' target_seconds)
-│
-├── PictView-Timeline-Cut (repeated per cut, vertical list)
-│   ├── Drag handle (≡)
-│   ├── Cut number badge (#1, #2, ...)
-│   ├── Start frame image slot (drop zone / upload / paste)
-│   ├── Prompt textarea
-│   ├── Duration control (target_seconds, number input with +/- steppers)
-│   ├── End frame image slot (drop zone / upload / paste, optional)
-│   ├── [Duplicate] [Delete] buttons
-│   └── Collapse/expand toggle
-│
-└── Visual timeline strip (bottom, read-only)
-    └── Proportional-width color blocks per cut showing relative durations
-```
+<!-- bespoke diagram: edit diagrams/view-hierarchy.mmd or .hints.json, then: npx pict-renderer-graph build modules/pict/pict-editor-timeline -->
+![View hierarchy](diagrams/view-hierarchy.svg)
 
 ### Provider pattern
 

@@ -1,0 +1,19 @@
+PictView-Timeline (container)
+├── PictView-Timeline-Toolbar
+│   ├── [+ Add Cut] button
+│   ├── [Import JSON] button
+│   ├── [Export JSON] button
+│   └── Total duration display (sum of all cuts' target_seconds)
+│
+├── PictView-Timeline-Cut (repeated per cut, vertical list)
+│   ├── Drag handle (≡)
+│   ├── Cut number badge (#1, #2, ...)
+│   ├── Start frame image slot (drop zone / upload / paste)
+│   ├── Prompt textarea
+│   ├── Duration control (target_seconds, number input with +/- steppers)
+│   ├── End frame image slot (drop zone / upload / paste, optional)
+│   ├── [Duplicate] [Delete] buttons
+│   └── Collapse/expand toggle
+│
+└── Visual timeline strip (bottom, read-only)
+    └── Proportional-width color blocks per cut showing relative durations

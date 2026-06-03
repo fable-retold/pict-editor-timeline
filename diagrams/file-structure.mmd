@@ -1,0 +1,20 @@
+pict-editor-timeline/
+├── package.json
+├── .quackage.json
+├── source/
+│   ├── Pict-Section-Timeline.js           # Main export
+│   ├── views/
+│   │   ├── PictView-Timeline.js           # Container view: renders the full editor
+│   │   ├── PictView-Timeline-Cut.js       # Per-cut row: prompt, duration, image slots
+│   │   └── PictView-Timeline-Toolbar.js   # Top bar: add cut, import/export, total duration
+│   ├── providers/
+│   │   ├── Pict-Provider-TimelineDragDrop.js   # HTML5 drag-and-drop reordering
+│   │   └── Pict-Provider-TimelineOps.js        # Data mutations (add, remove, reorder, update)
+│   └── templates/
+│       ├── timeline-container.html
+│       ├── timeline-cut.html
+│       └── timeline-toolbar.html
+├── test/
+│   └── Pict-Timeline_tests.js
+└── docs/
+    └── README.md
